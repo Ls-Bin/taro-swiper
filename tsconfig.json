@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "dist",
+    "sourceMap": true,
+    "target": "es2016",
+    "useDefineForClassFields": false,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "allowJs": false,
+    "strict": true,
+    "noUnusedLocals": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "removeComments": false,
+    "jsx": "react-jsx",
+    "lib": ["esnext", "dom"],
+    "types": [],
+    "rootDir": ".",
+    "paths": {
+    }
+  },
+  "include": [
+    "packages/index.ts",
+    "packages/global.d.ts",
+    "packages/*/src",
+    "packages/*/__tests__",
+    "test-dts"
+, "packages/monitoring-core/types"  ]
+}
