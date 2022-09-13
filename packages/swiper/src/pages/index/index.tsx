@@ -41,7 +41,7 @@ const Index = () => {
         使用Modal
       </Button>
 
-      <Navigator url="pages/swiper-demo/index">
+      <Navigator url="/pages/swiper-demo/index">
         <Button className="button" >
         跳转轮播图
       </Button></Navigator>

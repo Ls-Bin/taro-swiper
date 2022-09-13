@@ -1,8 +1,10 @@
 import React, {useCallback, useState} from "react";
 import {View, Text, Button, Image} from "@tarojs/components";
 import {useEnv, useNavigationBar,} from "taro-hooks";
-import {Swiper, SwiperItem} from "../../../../../dist";
-import '../../../../../rollup.build.css'
+// import {Swiper, SwiperItem} from "../../../../../dist";
+// import '../../../../../rollup.build.css'
+import {Swiper, SwiperItem} from "../../components/swiper";
+
 import './index.less'
 
 const Index = () => {
@@ -20,7 +22,7 @@ const Index = () => {
       <Swiper options={{loop: true, autoplay: true}}>
         {imgs.map((d, i) => (<SwiperItem key={i}>
           <View>
-            <Image src={d}/>
+            <Image src={d} style={{width:'100%'}}/>
           </View>
         </SwiperItem>))}
       </Swiper>

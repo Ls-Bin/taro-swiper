@@ -12,7 +12,6 @@ export function useAutoplay(props: AutoplayProps) {
   const [timer, setTimer] = useState<any>(null);
 
   useEffect(() => {
-    stopPlay()
     startPlay()
     return () => {
       stopPlay()
@@ -22,6 +21,7 @@ export function useAutoplay(props: AutoplayProps) {
 
   function startPlay() {
     if (!options.autoplay) return
+    stopPlay()
     setTimer(setInterval(() => {
         if (options.loop) {
           slideToLoop(currentIndex + 1, true)

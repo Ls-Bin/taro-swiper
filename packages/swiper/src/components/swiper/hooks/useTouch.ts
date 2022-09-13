@@ -32,6 +32,7 @@ export function useTouch(props: TouchProps) {
 
   const onTouchEnd = () => {
     events.onTouchEnd( touches, props)
+    
     setAllowMove(false)
     setIsTouch(false)
   }

@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import { generateTranslateX } from '../utils/translate';
 import {Translate} from "./useTranslate";
 
 export type SlideProps = {
@@ -17,47 +18,35 @@ export type SlideReturnData = {
 
 export function useSlide(props: { wrapWidth: number; slides: [any]; loop: boolean | undefined; setCurrentIndex: (value: (((prevState: number) => number) | number)) => void; currentIndex: number; setTranslate: (translatePx, isTransition) => void; setCurrentX: (value: (((prevState: number) => number) | number)) => void }) {
 
-  const [isInit, setIsInit] = useState(false)
-
-  useEffect(() => {
-    if (!isInit && props.wrapWidth) {
-      if (props.loop) {
-        if (props.currentIndex === 0) {
-          slideTo(1, false)
-        } else {
-          slideTo(props.currentIndex, false)
-        }
-
-        setIsInit(true)
-      } else {
-        setIsInit(true)
-      }
-    }
-  },)
-
-
   function slideTo(index, isTransition = true) {
-
     props.setCurrentIndex(index)
-    const translateNum = -props.wrapWidth * index
+    const translateNum = generateTranslateX(index,props.wrapWidth)
     props.setCurrentX(translateNum)
     props.setTranslate(translateNum, isTransition,)
-    // console.log('slideTo=', index, translateNum, props)
-    //
   }
 
   function slideToLoop(index, isTransition = true) {
 
-    if (index > props.slides.length) {
-      slideTo(0, false)
+    // 下一页操作
+    if (index > props.slides.length&&props.currentIndex===props.slides.length) {
+      slideToLoop(0, false)
       setTimeout(() => {
-        slideTo(1, true)
-      }, 0)
+        slideToLoop(1, true)
+      }, 20)
+      return
+    }
+
+    // 上一页操作
+    if (index === 0&&props.currentIndex===1) {
+      slideToLoop(props.slides.length+1, false)
+      setTimeout(() => {
+        slideToLoop(props.slides.length, true)
+      }, 20)
       return
     }
 
     props.setCurrentIndex(index)
-    const translateNum = -props.wrapWidth * index
+    const translateNum =  generateTranslateX(index,props.wrapWidth)
     props.setCurrentX(translateNum)
     props.setTranslate(translateNum, isTransition,)
   }
